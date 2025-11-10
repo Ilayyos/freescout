@@ -1,0 +1,22 @@
+{
+    "name": "Tags",
+    "alias": "tags",
+    "description": "Add flexible tags to categorize conversations across all mailboxes.",
+    "version": "1.0.0",
+    "detailsUrl": "",
+    "author": "FreeScout",
+    "authorUrl": "https://freescout.net",
+    "requiredAppVersion": "1.0.2",
+    "license": "AGPL-3.0",
+    "keywords": [],
+    "active": 0,
+    "order": 0,
+    "providers": [
+        "Modules\\Tags\\Providers\\TagsServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}
