@@ -1,0 +1,57 @@
+.tag-pill {
+    display: inline-block;
+    color: #ffffff;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+}
+
+.tags-table .form-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.tags-table .form-inline .form-control {
+    min-width: 110px;
+}
+
+.conv-tags {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-right: 10px;
+}
+
+.conv-tags__display {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.conv-tags__label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #7b8a8b;
+    text-transform: uppercase;
+}
+
+.conv-tags__select {
+    min-width: 200px;
+}
+
+.conv-tags__select .select2-selection__choice {
+    color: #ffffff;
+    border: none;
+    padding-right: 24px;
+    padding-left: 8px;
+}
+
+.conv-tags__select .select2-selection__choice__remove {
+    color: rgba(255, 255, 255, 0.75);
+}
