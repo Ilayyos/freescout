@@ -26,6 +26,9 @@ Thumbs.db
 /public/.well-known
 /Modules
 /Modules/**/.git
+!/Modules/
+!/Modules/Tags/
+!/Modules/Tags/**
 /public/modules
 /public/docs
 /storage/.ignore_locales
