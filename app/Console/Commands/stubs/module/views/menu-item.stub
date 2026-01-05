@@ -1,0 +1,5 @@
+@if (auth()->check())
+    <li class="{{ \App\Misc\Helper::menuSelectedHtml('$LOWER_NAME$') }}">
+        <a href="{{ route('$LOWER_NAME$') }}">{{ __('$TITLE_NAME$') }}</a>
+    </li>
+@endif

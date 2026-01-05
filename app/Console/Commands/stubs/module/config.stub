@@ -1,0 +1,11 @@
+<?php
+
+return [
+    'name' => '$STUDLY_NAME$',
+    'options' => [
+        // Module-specific options go here
+        // 'example_option' => [
+        //     'default' => false,
+        // ],
+    ],
+];

@@ -1,0 +1,76 @@
+<?php
+
+namespace $MODULE_NAMESPACE$\$STUDLY_NAME$\Support;
+
+use App\Option;
+use App\User;
+
+class $STUDLY_NAME$Permissions
+{
+    /**
+     * Check if users are allowed to manage this module.
+     *
+     * @return bool
+     */
+    public static function allowUserManagement(): bool
+    {
+        return (bool) Option::get('$LOWER_NAME$.allow_user_management', false);
+    }
+
+    /**
+     * Check if the user can manage this module.
+     *
+     * @param \App\User $user
+     * @return bool
+     */
+    public static function canManage(User $user): bool
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+
+        if (!self::allowUserManagement()) {
+            return false;
+        }
+
+        // Add custom permission check if needed
+        // return $user->hasPermission(User::PERM_CUSTOM);
+
+        return false;
+    }
+
+    /**
+     * Check if the user can view this module.
+     *
+     * @param \App\User $user
+     * @return bool
+     */
+    public static function canView(User $user): bool
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+
+        // Add custom view permission logic
+        return true;
+    }
+
+    /**
+     * Check if the user can edit resources in this module.
+     *
+     * @param \App\User $user
+     * @return bool
+     */
+    public static function canEdit(User $user): bool
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+
+        if (self::allowUserManagement()) {
+            return true;
+        }
+
+        return false;
+    }
+}

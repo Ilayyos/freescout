@@ -1,0 +1,59 @@
+@extends('layouts.app')
+
+@section('title', __('$TITLE_NAME$'))
+
+@section('content')
+    @include('partials/flash_messages')
+
+    <div class="page-title">
+        <h1>{{ __('$TITLE_NAME$') }}</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{ __('$TITLE_NAME$') }}
+                </div>
+                <div class="panel-body">
+                    <p>{{ __('Welcome to the $TITLE_NAME$ module.') }}</p>
+                    <p>{{ __('Start building your module here.') }}</p>
+
+                    {{-- Example content --}}
+                    <div class="margin-top-10">
+                        <a href="#" class="btn btn-primary">
+                            {{ __('Get Started') }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Example: List section --}}
+    {{--
+    <div class="panel panel-default">
+        <div class="panel-heading">{{ __('Items') }}</div>
+        <div class="panel-body p-0">
+            <div class="table-responsive">
+                <table class="table table-striped table-middle">
+                    <thead>
+                        <tr>
+                            <th>{{ __('Name') }}</th>
+                            <th>{{ __('Created') }}</th>
+                            <th class="text-right">{{ __('Actions') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="3" class="text-center text-muted">
+                                {{ __('No items yet.') }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    --}}
+@endsection

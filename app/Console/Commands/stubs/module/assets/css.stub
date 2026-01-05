@@ -1,0 +1,67 @@
+/**
+ * $STUDLY_NAME$ Module Styles
+ *
+ * @package $MODULE_NAMESPACE$\$STUDLY_NAME$
+ * @author $AUTHOR$
+ * @version 1.0.0
+ */
+
+/* Module container */
+.$LOWER_NAME$-container {
+    /* Add your styles here */
+}
+
+/* Module card/panel */
+.$LOWER_NAME$-panel {
+    margin-bottom: 20px;
+}
+
+.$LOWER_NAME$-panel .panel-heading {
+    font-weight: 600;
+}
+
+/* Module table */
+.$LOWER_NAME$-table {
+    width: 100%;
+}
+
+.$LOWER_NAME$-table th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+}
+
+/* Module badges/pills */
+.$LOWER_NAME$-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #4e7efc;
+}
+
+/* Module buttons */
+.$LOWER_NAME$-btn {
+    /* Extend base button styles */
+}
+
+/* Module form elements */
+.$LOWER_NAME$-form .form-group {
+    margin-bottom: 15px;
+}
+
+/* Loading state */
+.$LOWER_NAME$-loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .$LOWER_NAME$-container {
+        padding: 10px;
+    }
+}

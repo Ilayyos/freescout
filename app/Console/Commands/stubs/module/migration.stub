@@ -1,0 +1,42 @@
+<?php
+
+namespace $MODULE_NAMESPACE$\$STUDLY_NAME$\Database\Migrations;
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class Create$ENTITY_NAME$Table extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('$TABLE_NAME$', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name', 255);
+            // Add your columns here
+            // $table->string('description')->nullable();
+            // $table->unsignedBigInteger('user_id')->nullable();
+            // $table->boolean('is_active')->default(true);
+            $table->timestamps();
+
+            // Add indexes
+            // $table->index('name');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('$TABLE_NAME$');
+    }
+}

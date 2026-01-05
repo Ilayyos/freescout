@@ -1,0 +1,22 @@
+<?php
+
+namespace $MODULE_NAMESPACE$\$STUDLY_NAME$\Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
+
+class $STUDLY_NAME$DatabaseSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        Model::unguard();
+
+        // Seed your data here
+        // $this->call(OtherTableSeeder::class);
+    }
+}

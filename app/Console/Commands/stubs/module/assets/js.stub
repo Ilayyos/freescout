@@ -1,0 +1,118 @@
+/**
+ * $STUDLY_NAME$ Module JavaScript
+ *
+ * @package $MODULE_NAMESPACE$\$STUDLY_NAME$
+ * @author $AUTHOR$
+ * @version 1.0.0
+ */
+
+(function ($) {
+    'use strict';
+
+    /**
+     * Module namespace
+     */
+    window.$STUDLY_NAME$Module = window.$STUDLY_NAME$Module || {};
+
+    /**
+     * Escape HTML to prevent XSS
+     *
+     * @param {string} text
+     * @returns {string}
+     */
+    function escapeHtml(text) {
+        return $('<div/>').text(text).html();
+    }
+
+    /**
+     * Show loading state
+     *
+     * @param {jQuery} $element
+     */
+    function showLoading($element) {
+        $element.addClass('$LOWER_NAME$-loading');
+    }
+
+    /**
+     * Hide loading state
+     *
+     * @param {jQuery} $element
+     */
+    function hideLoading($element) {
+        $element.removeClass('$LOWER_NAME$-loading');
+    }
+
+    /**
+     * Show flash message
+     *
+     * @param {string} message
+     * @param {string} type - success, error, warning, info
+     */
+    function showFlash(message, type) {
+        type = type || 'success';
+        // Use FreeScout's flash message system if available
+        if (typeof showFloatingAlert === 'function') {
+            showFloatingAlert(type, message);
+        } else {
+            alert(message);
+        }
+    }
+
+    /**
+     * Make AJAX request with error handling
+     *
+     * @param {object} options
+     * @returns {jqXHR}
+     */
+    function ajax(options) {
+        var defaults = {
+            method: 'GET',
+            dataType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        };
+
+        return $.ajax($.extend(defaults, options))
+            .fail(function (xhr) {
+                var message = (xhr.responseJSON && xhr.responseJSON.message)
+                    ? xhr.responseJSON.message
+                    : 'An error occurred. Please try again.';
+                showFlash(message, 'error');
+            });
+    }
+
+    /**
+     * Initialize module components
+     *
+     * @param {HTMLElement|jQuery} context - Optional context element
+     */
+    function initialize(context) {
+        var $root = context ? $(context) : $(document);
+
+        // Initialize your components here
+        // Example: Initialize Select2, DataTables, etc.
+
+        // $root.find('.select2').select2();
+    }
+
+    /**
+     * Document ready handler
+     */
+    $(document).ready(function () {
+        initialize();
+
+        // Add event handlers here
+        // $(document).on('click', '.btn-action', function (e) {
+        //     e.preventDefault();
+        //     // Handle click
+        // });
+    });
+
+    // Export public methods
+    $STUDLY_NAME$Module.initialize = initialize;
+    $STUDLY_NAME$Module.ajax = ajax;
+    $STUDLY_NAME$Module.showFlash = showFlash;
+    $STUDLY_NAME$Module.escapeHtml = escapeHtml;
+
+})(window.jQuery);

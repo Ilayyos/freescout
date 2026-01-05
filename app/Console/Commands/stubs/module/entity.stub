@@ -1,0 +1,85 @@
+<?php
+
+namespace $MODULE_NAMESPACE$\$STUDLY_NAME$\Entities;
+
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+
+class $ENTITY_NAME$ extends Model
+{
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = '$TABLE_NAME$';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+        // Add your fillable attributes here
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'name' => 'string',
+        // Add your casts here
+    ];
+
+    /**
+     * Boot the model.
+     */
+    protected static function booted()
+    {
+        // Add model events here
+        // static::creating(function (self $model) {
+        //     // Pre-create logic
+        // });
+    }
+
+    /**
+     * Scope a query to order by name.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $builder
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOrdered(Builder $builder): Builder
+    {
+        return $builder->orderBy('name');
+    }
+
+    /**
+     * Scope a query to filter by search term.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $builder
+     * @param string|null $term
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeSearch(Builder $builder, ?string $term): Builder
+    {
+        if (empty($term)) {
+            return $builder;
+        }
+
+        return $builder->where('name', 'like', '%' . $term . '%');
+    }
+
+    /**
+     * Get the display name.
+     *
+     * @return string
+     */
+    public function getDisplayNameAttribute(): string
+    {
+        return $this->name ?? '';
+    }
+}
