@@ -5,12 +5,17 @@ Route::group([
     'prefix' => \Helper::getSubdirectory(),
     'namespace' => '$MODULE_NAMESPACE$\\$STUDLY_NAME$\\Http\\Controllers',
 ], function () {
-    // Main module route
-    Route::get('$LOWER_NAME$', '$STUDLY_NAME$Controller@index')->name('$LOWER_NAME$');
+    // List all items
+    Route::get('$LOWER_NAME$', '$STUDLY_NAME$Controller@index')->name('$LOWER_NAME$.index');
 
-    // Add more routes here as needed
-    // Route::post('$LOWER_NAME$', '$STUDLY_NAME$Controller@store')->name('$LOWER_NAME$.store');
-    // Route::get('$LOWER_NAME$/{id}', '$STUDLY_NAME$Controller@show')->name('$LOWER_NAME$.show');
-    // Route::put('$LOWER_NAME$/{id}', '$STUDLY_NAME$Controller@update')->name('$LOWER_NAME$.update');
-    // Route::delete('$LOWER_NAME$/{id}', '$STUDLY_NAME$Controller@destroy')->name('$LOWER_NAME$.destroy');
+    // Create new item
+    Route::get('$LOWER_NAME$/create', '$STUDLY_NAME$Controller@create')->name('$LOWER_NAME$.create');
+    Route::post('$LOWER_NAME$', '$STUDLY_NAME$Controller@store')->name('$LOWER_NAME$.store');
+
+    // Edit item
+    Route::get('$LOWER_NAME$/{id}/edit', '$STUDLY_NAME$Controller@edit')->name('$LOWER_NAME$.edit');
+    Route::put('$LOWER_NAME$/{id}', '$STUDLY_NAME$Controller@update')->name('$LOWER_NAME$.update');
+
+    // Delete item
+    Route::delete('$LOWER_NAME$/{id}', '$STUDLY_NAME$Controller@destroy')->name('$LOWER_NAME$.destroy');
 });

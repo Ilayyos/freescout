@@ -1,0 +1,22 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register API routes for your module.
+|
+*/
+
+Route::group([
+    'middleware' => ['api', 'auth:api'],
+    'prefix' => 'api/v1/$LOWER_NAME$',
+    'namespace' => '$MODULE_NAMESPACE$\\$STUDLY_NAME$\\Http\\Controllers\\Api',
+], function () {
+    Route::get('/', '$ENTITY_NAME$Controller@index')->name('api.$LOWER_NAME$.index');
+    Route::post('/', '$ENTITY_NAME$Controller@store')->name('api.$LOWER_NAME$.store');
+    Route::get('/{id}', '$ENTITY_NAME$Controller@show')->name('api.$LOWER_NAME$.show');
+    Route::put('/{id}', '$ENTITY_NAME$Controller@update')->name('api.$LOWER_NAME$.update');
+    Route::delete('/{id}', '$ENTITY_NAME$Controller@destroy')->name('api.$LOWER_NAME$.destroy');
+});

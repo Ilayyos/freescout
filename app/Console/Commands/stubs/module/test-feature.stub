@@ -1,0 +1,130 @@
+<?php
+
+namespace $MODULE_NAMESPACE$\$STUDLY_NAME$\Tests\Feature;
+
+use Tests\TestCase;
+use App\User;
+use $MODULE_NAMESPACE$\$STUDLY_NAME$\Entities\$ENTITY_NAME$;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+class $STUDLY_NAME$ControllerTest extends TestCase
+{
+    use RefreshDatabase;
+
+    /**
+     * Test index page loads.
+     *
+     * @return void
+     */
+    public function test_index_page_loads(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)
+            ->get(route('$LOWER_NAME$.index'));
+
+        $response->assertStatus(200);
+        $response->assertViewIs('$LOWER_NAME$::index');
+    }
+
+    /**
+     * Test create page loads.
+     *
+     * @return void
+     */
+    public function test_create_page_loads(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)
+            ->get(route('$LOWER_NAME$.create'));
+
+        $response->assertStatus(200);
+        $response->assertViewIs('$LOWER_NAME$::create');
+    }
+
+    /**
+     * Test can store new item.
+     *
+     * @return void
+     */
+    public function test_can_store_$ENTITY_SNAKE$(): void
+    {
+        $user = User::factory()->create();
+
+        $data = [
+            'name' => 'Test Item',
+        ];
+
+        $response = $this->actingAs($user)
+            ->post(route('$LOWER_NAME$.store'), $data);
+
+        $response->assertRedirect(route('$LOWER_NAME$.index'));
+        $this->assertDatabaseHas('$TABLE_NAME$', $data);
+    }
+
+    /**
+     * Test edit page loads.
+     *
+     * @return void
+     */
+    public function test_edit_page_loads(): void
+    {
+        $user = User::factory()->create();
+        $$ENTITY_LOWER$ = $ENTITY_NAME$::create(['name' => 'Test']);
+
+        $response = $this->actingAs($user)
+            ->get(route('$LOWER_NAME$.edit', $$ENTITY_LOWER$->id));
+
+        $response->assertStatus(200);
+        $response->assertViewIs('$LOWER_NAME$::edit');
+    }
+
+    /**
+     * Test can update item.
+     *
+     * @return void
+     */
+    public function test_can_update_$ENTITY_SNAKE$(): void
+    {
+        $user = User::factory()->create();
+        $$ENTITY_LOWER$ = $ENTITY_NAME$::create(['name' => 'Original']);
+
+        $response = $this->actingAs($user)
+            ->put(route('$LOWER_NAME$.update', $$ENTITY_LOWER$->id), [
+                'name' => 'Updated',
+            ]);
+
+        $response->assertRedirect(route('$LOWER_NAME$.index'));
+        $this->assertDatabaseHas('$TABLE_NAME$', ['name' => 'Updated']);
+    }
+
+    /**
+     * Test can delete item.
+     *
+     * @return void
+     */
+    public function test_can_delete_$ENTITY_SNAKE$(): void
+    {
+        $user = User::factory()->create();
+        $$ENTITY_LOWER$ = $ENTITY_NAME$::create(['name' => 'To Delete']);
+
+        $response = $this->actingAs($user)
+            ->delete(route('$LOWER_NAME$.destroy', $$ENTITY_LOWER$->id));
+
+        $response->assertRedirect(route('$LOWER_NAME$.index'));
+        $this->assertDatabaseMissing('$TABLE_NAME$', ['id' => $$ENTITY_LOWER$->id]);
+    }
+
+    /**
+     * Test unauthenticated access is denied.
+     *
+     * @return void
+     */
+    public function test_unauthenticated_access_denied(): void
+    {
+        $response = $this->get(route('$LOWER_NAME$.index'));
+
+        $response->assertRedirect(route('login'));
+    }
+}

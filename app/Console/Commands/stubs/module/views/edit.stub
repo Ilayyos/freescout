@@ -1,0 +1,56 @@
+@extends('layouts.app')
+
+@section('title', __('Edit $TITLE_NAME$'))
+
+@section('content')
+    @include('partials/flash_messages')
+
+    <div class="page-title">
+        <h1>{{ __('Edit $TITLE_NAME$') }}</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{ __('Edit $TITLE_NAME$') }}
+                </div>
+                <div class="panel-body">
+                    <form method="POST" action="{{ route('$LOWER_NAME$.update', $item->id) }}" class="form-horizontal">
+                        @csrf
+                        @method('PUT')
+
+                        @include('$LOWER_NAME$::partials.form')
+
+                        <div class="form-group">
+                            <div class="col-sm-6 col-sm-offset-2">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Save Changes') }}
+                                </button>
+                                <a href="{{ route('$LOWER_NAME$.index') }}" class="btn btn-link">
+                                    {{ __('Cancel') }}
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    {{ __('Danger Zone') }}
+                </div>
+                <div class="panel-body">
+                    <form method="POST" action="{{ route('$LOWER_NAME$.destroy', $item->id) }}"
+                          onsubmit="return confirm('{{ __('Are you sure you want to delete this?') }}');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">
+                            {{ __('Delete') }}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

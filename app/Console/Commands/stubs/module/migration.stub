@@ -17,16 +17,8 @@ class Create$ENTITY_NAME$Table extends Migration
     {
         Schema::create('$TABLE_NAME$', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name', 255);
-            // Add your columns here
-            // $table->string('description')->nullable();
-            // $table->unsignedBigInteger('user_id')->nullable();
-            // $table->boolean('is_active')->default(true);
+            $MIGRATION_FIELDS$
             $table->timestamps();
-
-            // Add indexes
-            // $table->index('name');
-            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

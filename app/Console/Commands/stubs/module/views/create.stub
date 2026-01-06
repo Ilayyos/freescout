@@ -1,0 +1,39 @@
+@extends('layouts.app')
+
+@section('title', __('Create $TITLE_NAME$'))
+
+@section('content')
+    @include('partials/flash_messages')
+
+    <div class="page-title">
+        <h1>{{ __('Create $TITLE_NAME$') }}</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{ __('New $TITLE_NAME$') }}
+                </div>
+                <div class="panel-body">
+                    <form method="POST" action="{{ route('$LOWER_NAME$.store') }}" class="form-horizontal">
+                        @csrf
+
+                        @include('$LOWER_NAME$::partials.form')
+
+                        <div class="form-group">
+                            <div class="col-sm-6 col-sm-offset-2">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Create') }}
+                                </button>
+                                <a href="{{ route('$LOWER_NAME$.index') }}" class="btn btn-link">
+                                    {{ __('Cancel') }}
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

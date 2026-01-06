@@ -1,0 +1,81 @@
+<?php
+
+namespace $MODULE_NAMESPACE$\$STUDLY_NAME$\Tests\Unit;
+
+use Tests\TestCase;
+use $MODULE_NAMESPACE$\$STUDLY_NAME$\Entities\$ENTITY_NAME$;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+class $ENTITY_NAME$Test extends TestCase
+{
+    use RefreshDatabase;
+
+    /**
+     * Test entity can be created.
+     *
+     * @return void
+     */
+    public function test_can_create_$ENTITY_SNAKE$(): void
+    {
+        $data = [
+            'name' => 'Test $ENTITY_NAME$',
+        ];
+
+        $$ENTITY_LOWER$ = $ENTITY_NAME$::create($data);
+
+        $this->assertInstanceOf($ENTITY_NAME$::class, $$ENTITY_LOWER$);
+        $this->assertEquals('Test $ENTITY_NAME$', $$ENTITY_LOWER$->name);
+        $this->assertDatabaseHas('$TABLE_NAME$', $data);
+    }
+
+    /**
+     * Test entity can be updated.
+     *
+     * @return void
+     */
+    public function test_can_update_$ENTITY_SNAKE$(): void
+    {
+        $$ENTITY_LOWER$ = $ENTITY_NAME$::create([
+            'name' => 'Original Name',
+        ]);
+
+        $$ENTITY_LOWER$->update([
+            'name' => 'Updated Name',
+        ]);
+
+        $this->assertEquals('Updated Name', $$ENTITY_LOWER$->fresh()->name);
+    }
+
+    /**
+     * Test entity can be deleted.
+     *
+     * @return void
+     */
+    public function test_can_delete_$ENTITY_SNAKE$(): void
+    {
+        $$ENTITY_LOWER$ = $ENTITY_NAME$::create([
+            'name' => 'To Delete',
+        ]);
+
+        $id = $$ENTITY_LOWER$->id;
+        $$ENTITY_LOWER$->delete();
+
+        $this->assertDatabaseMissing('$TABLE_NAME$', ['id' => $id]);
+    }
+
+    /**
+     * Test ordered scope.
+     *
+     * @return void
+     */
+    public function test_ordered_scope(): void
+    {
+        $ENTITY_NAME$::create(['name' => 'Zebra']);
+        $ENTITY_NAME$::create(['name' => 'Apple']);
+        $ENTITY_NAME$::create(['name' => 'Mango']);
+
+        $ordered = $ENTITY_NAME$::ordered()->pluck('name')->toArray();
+
+        $this->assertEquals(['Apple', 'Mango', 'Zebra'], $ordered);
+    }
+}

@@ -1,0 +1,72 @@
+<?php
+
+namespace $MODULE_NAMESPACE$\$STUDLY_NAME$\Widgets;
+
+use Illuminate\View\View;
+
+class $STUDLY_NAME$Widget
+{
+    /**
+     * Widget identifier.
+     *
+     * @var string
+     */
+    public $id = '$LOWER_NAME$_widget';
+
+    /**
+     * Widget name.
+     *
+     * @var string
+     */
+    public $name = '$TITLE_NAME$';
+
+    /**
+     * Widget description.
+     *
+     * @var string
+     */
+    public $description = '$DESCRIPTION$';
+
+    /**
+     * Widget width (1-12 columns).
+     *
+     * @var int
+     */
+    public $width = 6;
+
+    /**
+     * Check if widget should be displayed.
+     *
+     * @return bool
+     */
+    public function shouldDisplay(): bool
+    {
+        // Add your visibility logic here
+        // Example: return auth()->user()->isAdmin();
+        return true;
+    }
+
+    /**
+     * Get widget data.
+     *
+     * @return array
+     */
+    public function getData(): array
+    {
+        // Fetch your widget data here
+        return [
+            'count' => 0,
+            'items' => [],
+        ];
+    }
+
+    /**
+     * Render the widget.
+     *
+     * @return View
+     */
+    public function render(): View
+    {
+        return view('$LOWER_NAME$::widgets.dashboard', $this->getData());
+    }
+}

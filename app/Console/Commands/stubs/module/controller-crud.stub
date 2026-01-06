@@ -1,0 +1,121 @@
+<?php
+
+namespace $MODULE_NAMESPACE$\$STUDLY_NAME$\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Controller;
+use Illuminate\View\View;
+use $MODULE_NAMESPACE$\$STUDLY_NAME$\Entities\$ENTITY_NAME$;
+
+class $STUDLY_NAME$Controller extends Controller
+{
+    /**
+     * Display a listing of items.
+     *
+     * @param Request $request
+     * @return View
+     */
+    public function index(Request $request): View
+    {
+        $query = $ENTITY_NAME$::query();
+
+        // Search functionality
+        if ($search = $request->get('search')) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%");
+            });
+        }
+
+        $items = $query->orderBy('created_at', 'desc')->paginate(20);
+
+        return view('$LOWER_NAME$::index', [
+            'items' => $items,
+            'search' => $search ?? '',
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new item.
+     *
+     * @return View
+     */
+    public function create(): View
+    {
+        return view('$LOWER_NAME$::create', [
+            'item' => new $ENTITY_NAME$(),
+        ]);
+    }
+
+    /**
+     * Store a newly created item.
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function store(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            $VALIDATION_RULES$
+        ]);
+
+        $ENTITY_NAME$::create($validated);
+
+        return redirect()
+            ->route('$LOWER_NAME$.index')
+            ->with('flash_success', __('Created successfully.'));
+    }
+
+    /**
+     * Show the form for editing an item.
+     *
+     * @param int $id
+     * @return View
+     */
+    public function edit(int $id): View
+    {
+        $item = $ENTITY_NAME$::findOrFail($id);
+
+        return view('$LOWER_NAME$::edit', [
+            'item' => $item,
+        ]);
+    }
+
+    /**
+     * Update the specified item.
+     *
+     * @param Request $request
+     * @param int $id
+     * @return RedirectResponse
+     */
+    public function update(Request $request, int $id): RedirectResponse
+    {
+        $item = $ENTITY_NAME$::findOrFail($id);
+
+        $validated = $request->validate([
+            $VALIDATION_RULES$
+        ]);
+
+        $item->update($validated);
+
+        return redirect()
+            ->route('$LOWER_NAME$.index')
+            ->with('flash_success', __('Updated successfully.'));
+    }
+
+    /**
+     * Remove the specified item.
+     *
+     * @param int $id
+     * @return RedirectResponse
+     */
+    public function destroy(int $id): RedirectResponse
+    {
+        $item = $ENTITY_NAME$::findOrFail($id);
+        $item->delete();
+
+        return redirect()
+            ->route('$LOWER_NAME$.index')
+            ->with('flash_success', __('Deleted successfully.'));
+    }
+}

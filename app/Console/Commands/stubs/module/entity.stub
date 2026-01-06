@@ -4,7 +4,6 @@ namespace $MODULE_NAMESPACE$\$STUDLY_NAME$\Entities;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class $ENTITY_NAME$ extends Model
 {
@@ -21,8 +20,7 @@ class $ENTITY_NAME$ extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        // Add your fillable attributes here
+        $FILLABLE_FIELDS$
     ];
 
     /**
@@ -31,8 +29,7 @@ class $ENTITY_NAME$ extends Model
      * @var array
      */
     protected $casts = [
-        'name' => 'string',
-        // Add your casts here
+        $CAST_FIELDS$
     ];
 
     /**
@@ -40,7 +37,7 @@ class $ENTITY_NAME$ extends Model
      */
     protected static function booted()
     {
-        // Add model events here
+        // Add model events here if needed
         // static::creating(function (self $model) {
         //     // Pre-create logic
         // });
@@ -54,7 +51,7 @@ class $ENTITY_NAME$ extends Model
      */
     public function scopeOrdered(Builder $builder): Builder
     {
-        return $builder->orderBy('name');
+        return $builder->orderBy('created_at', 'desc');
     }
 
     /**
@@ -70,16 +67,9 @@ class $ENTITY_NAME$ extends Model
             return $builder;
         }
 
-        return $builder->where('name', 'like', '%' . $term . '%');
-    }
-
-    /**
-     * Get the display name.
-     *
-     * @return string
-     */
-    public function getDisplayNameAttribute(): string
-    {
-        return $this->name ?? '';
+        return $builder->where(function ($query) use ($term) {
+            $query->where('id', $term);
+            // Add more searchable fields here
+        });
     }
 }

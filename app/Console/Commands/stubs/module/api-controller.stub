@@ -1,0 +1,115 @@
+<?php
+
+namespace $MODULE_NAMESPACE$\$STUDLY_NAME$\Http\Controllers\Api;
+
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use $MODULE_NAMESPACE$\$STUDLY_NAME$\Entities\$ENTITY_NAME$;
+
+class $ENTITY_NAME$Controller extends Controller
+{
+    /**
+     * Display a listing of items.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function index(Request $request): JsonResponse
+    {
+        $query = $ENTITY_NAME$::query();
+
+        // Search
+        if ($search = $request->get('search')) {
+            $query->where('name', 'like', "%{$search}%");
+        }
+
+        // Pagination
+        $perPage = min($request->get('per_page', 15), 100);
+        $items = $query->orderBy('created_at', 'desc')->paginate($perPage);
+
+        return response()->json([
+            'data' => $items->items(),
+            'meta' => [
+                'current_page' => $items->currentPage(),
+                'last_page' => $items->lastPage(),
+                'per_page' => $items->perPage(),
+                'total' => $items->total(),
+            ],
+        ]);
+    }
+
+    /**
+     * Store a newly created item.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function store(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            $VALIDATION_RULES$
+        ]);
+
+        $item = $ENTITY_NAME$::create($validated);
+
+        return response()->json([
+            'message' => __('Created successfully.'),
+            'data' => $item,
+        ], 201);
+    }
+
+    /**
+     * Display the specified item.
+     *
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function show(int $id): JsonResponse
+    {
+        $item = $ENTITY_NAME$::findOrFail($id);
+
+        return response()->json([
+            'data' => $item,
+        ]);
+    }
+
+    /**
+     * Update the specified item.
+     *
+     * @param Request $request
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function update(Request $request, int $id): JsonResponse
+    {
+        $item = $ENTITY_NAME$::findOrFail($id);
+
+        $validated = $request->validate([
+            $VALIDATION_RULES$
+        ]);
+
+        $item->update($validated);
+
+        return response()->json([
+            'message' => __('Updated successfully.'),
+            'data' => $item,
+        ]);
+    }
+
+    /**
+     * Remove the specified item.
+     *
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function destroy(int $id): JsonResponse
+    {
+        $item = $ENTITY_NAME$::findOrFail($id);
+        $item->delete();
+
+        return response()->json([
+            'message' => __('Deleted successfully.'),
+        ]);
+    }
+}

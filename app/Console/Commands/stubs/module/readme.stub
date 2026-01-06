@@ -1,0 +1,112 @@
+# $STUDLY_NAME$ Module
+
+$DESCRIPTION$
+
+## Requirements
+
+- FreeScout 1.0.2 or higher
+- PHP 7.4 or higher
+
+## Installation
+
+1. Copy the module folder to `Modules/$STUDLY_NAME$`
+2. Run database migrations:
+   ```bash
+   php artisan module:migrate $STUDLY_NAME$
+   ```
+3. Activate the module:
+   ```bash
+   php artisan module:enable $STUDLY_NAME$
+   ```
+4. Clear the cache:
+   ```bash
+   php artisan freescout:clear-cache
+   ```
+
+## Configuration
+
+Module configuration is located in `Config/config.php`.
+
+You can publish the configuration to your main config directory:
+
+```bash
+php artisan vendor:publish --tag=config --provider="Modules\$STUDLY_NAME$\Providers\$STUDLY_NAME$ServiceProvider"
+```
+
+## Usage
+
+After installation, access the module at:
+- **URL:** `/admin/$LOWER_NAME$`
+- **Menu:** Manage → $TITLE_NAME$
+
+## Features
+
+- Create, edit, and delete records
+- Search and filter functionality
+- Pagination support
+- Form validation
+- Responsive design
+
+## File Structure
+
+```
+$STUDLY_NAME$/
+├── Config/
+│   └── config.php           # Module configuration
+├── Database/
+│   ├── Migrations/          # Database migrations
+│   └── Seeders/             # Database seeders
+├── Entities/                # Eloquent models
+├── Http/
+│   ├── Controllers/         # HTTP controllers
+│   ├── Requests/            # Form requests
+│   └── routes.php           # Route definitions
+├── Providers/
+│   └── $STUDLY_NAME$ServiceProvider.php
+├── Public/
+│   ├── css/                 # Stylesheets
+│   └── js/                  # JavaScript files
+├── Resources/
+│   ├── lang/                # Translation files
+│   └── views/               # Blade templates
+├── Support/                 # Helper classes
+├── composer.json
+├── module.json
+└── README.md
+```
+
+## Hooks
+
+This module integrates with FreeScout using the following hooks:
+
+- `menu.manage.after_mailboxes` - Adds menu item
+- `stylesheets` - Registers CSS
+- `javascripts` - Registers JavaScript
+
+## Development
+
+### Adding New Features
+
+1. Create migrations in `Database/Migrations/`
+2. Add models to `Entities/`
+3. Create controllers in `Http/Controllers/`
+4. Add views to `Resources/views/`
+
+### Running Tests
+
+```bash
+php artisan test --filter=$STUDLY_NAME$
+```
+
+## License
+
+$STUDLY_NAME$ is open-sourced software licensed under the [AGPL-3.0 license](https://opensource.org/licenses/AGPL-3.0).
+
+## Author
+
+- **$AUTHOR$** - <$AUTHOR_EMAIL$>
+
+## Changelog
+
+### 1.0.0 - $YEAR$
+- Initial release
